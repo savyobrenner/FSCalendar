@@ -475,6 +475,11 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
 {
     NSDate *selectedDate = [self.calculator dateForIndexPath:indexPath];
     FSCalendarMonthPosition monthPosition = [self.calculator monthPositionForIndexPath:indexPath];
+    
+    if (self.scope == FSCalendarScopeWeek && [self.gregorian isDate:selectedDate equalToDate:self.currentPage toUnitGranularity:NSCalendarUnitMonth]) {
+        [self setScope:FSCalendarScopeMonth animated:YES];
+    }
+    
     FSCalendarCell *cell;
     if (monthPosition == FSCalendarMonthPositionCurrent) {
         cell = (FSCalendarCell *)[collectionView cellForItemAtIndexPath:indexPath];
@@ -633,7 +638,6 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
         }
         [self didChangeValueForKey:@"currentPage"];
     }
-    
 }
 
 #pragma mark - <UIGestureRecognizerDelegate>
