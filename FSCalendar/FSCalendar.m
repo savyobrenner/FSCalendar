@@ -501,10 +501,17 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSDate *selectedDate = [self.calculator dateForIndexPath:indexPath];
+    
     FSCalendarMonthPosition monthPosition = [self.calculator monthPositionForIndexPath:indexPath];
     if (self.placeholderType == FSCalendarPlaceholderTypeNone && monthPosition != FSCalendarMonthPositionCurrent) {
         return NO;
     }
+    
+    if (self.scope == FSCalendarScopeWeek && [self.gregorian isDate:selectedDate equalToDate:self.currentPage toUnitGranularity:NSCalendarUnitMonth]) {
+        [self setScope:FSCalendarScopeMonth animated:YES];
+    }
+    
     NSDate *date = [self.calculator dateForIndexPath:indexPath];
     return [self isDateInRange:date] && (![self.delegateProxy respondsToSelector:@selector(calendar:shouldDeselectDate:atMonthPosition:)]||[self.delegateProxy calendar:self shouldDeselectDate:date atMonthPosition:monthPosition]);
 }
