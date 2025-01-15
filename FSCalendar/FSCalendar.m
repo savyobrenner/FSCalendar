@@ -1126,6 +1126,12 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     }
 }
 
+- (void)calendarDidTapTitle:(FSCalendar *)calendar {
+    if (self.scope == FSCalendarScopeWeek) {
+        [self setScope:FSCalendarScopeMonth animated:YES];
+    }
+}
+
 - (void)handleScopeGesture:(UIPanGestureRecognizer *)sender
 {
     if (self.floatingMode) return;
@@ -1460,12 +1466,6 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
             break;
     }
    
-}
-
-- (void)handleHeaderTap:(UITapGestureRecognizer *)gesture {
-    if (self.scope == FSCalendarScopeWeek) {
-        [self setScope:FSCalendarScopeMonth animated:YES];
-    }
 }
 
 - (void)selectCounterpartDate:(NSDate *)date
