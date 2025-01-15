@@ -230,6 +230,8 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
     
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleHeaderTap:)];
+    [self.calendarHeaderView addGestureRecognizer:tapGesture];
 }
 
 - (void)dealloc
@@ -334,7 +336,6 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
         }
         _collectionView.fs_height = FSCalendarHalfFloor(_collectionView.fs_height);
     }
-    
 }
 
 #if TARGET_INTERFACE_BUILDER
@@ -1459,6 +1460,12 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
             break;
     }
    
+}
+
+- (void)handleHeaderTap:(UITapGestureRecognizer *)gesture {
+    if (self.scope == FSCalendarScopeWeek) {
+        [self setScope:FSCalendarScopeMonth animated:YES];
+    }
 }
 
 - (void)selectCounterpartDate:(NSDate *)date
