@@ -478,8 +478,6 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     
     if (self.scope == FSCalendarScopeWeek && [self.gregorian isDate:selectedDate equalToDate:self.currentPage toUnitGranularity:NSCalendarUnitMonth]) {
         [self setScope:FSCalendarScopeMonth animated:YES];
-    } else if (self.scope == FSCalendarScopeMonth && [self.gregorian isDate:selectedDate equalToDate:self.currentPage toUnitGranularity:NSCalendarUnitMonth]) {
-        [self setScope:FSCalendarScopeWeek animated:YES];
     }
     
     FSCalendarCell *cell;
