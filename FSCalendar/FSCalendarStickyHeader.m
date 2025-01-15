@@ -50,9 +50,6 @@
         FSCalendarWeekdayView *weekdayView = [[FSCalendarWeekdayView alloc] init];
         [self.contentView addSubview:weekdayView];
         self.weekdayView = weekdayView;
-        
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTitleTap)];
-        [self.titleLabel addGestureRecognizer:tapGesture];
     }
     return self;
 }
@@ -117,12 +114,6 @@
     }
 
     self.titleLabel.text = text;
-}
-
-- (void)handleTitleTap {
-    if ([self.calendar.delegate respondsToSelector:@selector(calendarDidTapTitle:)]) {
-        [self.calendar.delegate calendarDidTapTitle:self.calendar];
-    }
 }
 
 @end

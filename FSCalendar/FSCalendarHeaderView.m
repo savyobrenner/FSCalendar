@@ -221,6 +221,9 @@
         titleLabel.numberOfLines = 0;
         [self.contentView addSubview:titleLabel];
         self.titleLabel = titleLabel;
+        
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTitleTap)];
+        [self.titleLabel addGestureRecognizer:tapGesture];
     }
     return self;
 }
@@ -252,6 +255,12 @@
         CGFloat position = [self.contentView convertPoint:CGPointMake(CGRectGetMidX(self.contentView.bounds), CGRectGetMidY(self.contentView.bounds)) toView:self.header].y;
         CGFloat center = CGRectGetMidY(self.header.bounds);
         self.contentView.alpha = 1.0 - (1.0-self.header.calendar.appearance.headerMinimumDissolvedAlpha)*ABS(center-position)/self.fs_height;
+    }
+}
+
+- (void)handleHeaderTap {
+    if (self.header.calendar.scope == FSCalendarScopeWeek) {
+        [self.header.calendar setScope:FSCalendarScopeMonth animated:YES];
     }
 }
 
