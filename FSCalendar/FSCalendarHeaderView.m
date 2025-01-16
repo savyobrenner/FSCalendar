@@ -223,7 +223,7 @@
         self.titleLabel = titleLabel;
         
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTitleTap)];
-        [self.titleLabel addGestureRecognizer:tapGesture];
+        [self addGestureRecognizer:tapGesture];
     }
     return self;
 }
