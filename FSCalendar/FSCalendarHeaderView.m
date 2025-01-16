@@ -60,6 +60,9 @@
     [self addSubview:collectionView];
     [collectionView registerClass:[FSCalendarHeaderCell class] forCellWithReuseIdentifier:@"cell"];
     self.collectionView = collectionView;
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTitleTap)];
+    [self addGestureRecognizer:tapGesture];
 }
 
 - (void)layoutSubviews
@@ -141,6 +144,12 @@
     if (_scrollEnabled != scrollEnabled) {
         _scrollEnabled = scrollEnabled;
         [_collectionView.visibleCells makeObjectsPerformSelector:@selector(setNeedsLayout)];
+    }
+}
+
+- (void)handleHeaderTap {
+    if (self.calendar.scope == FSCalendarScopeWeek) {
+        [self.calendar setScope:FSCalendarScopeMonth animated:YES];
     }
 }
 
