@@ -522,11 +522,6 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     [_selectedDates removeObject:selectedDate];
     [self.delegateProxy calendar:self didDeselectDate:selectedDate atMonthPosition:monthPosition];
     [self deselectCounterpartDate:selectedDate];
-    
-    if (self.scope == FSCalendarScopeWeek && [self.gregorian isDate:selectedDate equalToDate:self.currentPage toUnitGranularity:NSCalendarUnitMonth]) {
-        [self setScope:FSCalendarScopeMonth animated:YES];
-    }
-    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
