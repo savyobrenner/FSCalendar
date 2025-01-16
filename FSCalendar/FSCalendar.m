@@ -229,9 +229,6 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     self.calculator = [[FSCalendarCalculator alloc] initWithCalendar:self];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
-    
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleHeaderTap:)];
-    [self.calendarHeaderView addGestureRecognizer:tapGesture];
 }
 
 - (void)dealloc
